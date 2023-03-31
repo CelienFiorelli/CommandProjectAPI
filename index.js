@@ -15,12 +15,12 @@ app.use(function (req, res, next) {
 const port = 5000
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`[+] Listening on port ${port}`)
     mongoose.connect(connectString, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(() => {
-            console.log("connect");
+            console.log("[+] Database connected");
         })
         .catch((err) => {
             console.error(`Error\n${err}`);
@@ -30,12 +30,22 @@ app.listen(port, () => {
 const commandFilesGet = fs.readdirSync('./get').filter(file => file.endsWith('.js'));
 for (const file of commandFilesGet) {
     const endpoint = require(`./get/${file}`);
+    if (endpoint.hasOwnProperty("upload"))
+    {
+        app.get(endpoint.endpoint, endpoint.upload, endpoint.process)
+        continue
+    }
     app.get(endpoint.endpoint, endpoint.process)
 }
 
 const commandFilesPost = fs.readdirSync('./post').filter(file => file.endsWith('.js'));
 for (const file of commandFilesPost) {
     const endpoint = require(`./post/${file}`);
+    if (endpoint.hasOwnProperty("upload"))
+    {
+        app.post(endpoint.endpoint, endpoint.upload, endpoint.process)
+        continue
+    }
     app.post(endpoint.endpoint, endpoint.process)
 }
 
