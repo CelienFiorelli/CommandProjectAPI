@@ -2,6 +2,7 @@ const { connectString } = require('./config.json');
 const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('fs');
+const path = require('path')
 
 const app = express();
 
@@ -11,6 +12,8 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     next();
 });
+
+app.use('/images', express.static('images'));
 
 const port = 5000
 
