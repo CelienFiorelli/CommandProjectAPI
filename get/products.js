@@ -6,9 +6,9 @@ module.exports = {
     endpoint: "/get/products",
     process: async (req, res) => {
         const products = {
-            Boissons: await Drink.find(), 
-            Burgers: await Burger.find(), 
-            Menus: await Menu.find(), 
+            Boissons: await Drink.find().populate("product"), 
+            Burgers: await Burger.find().populate("product"), 
+            Menus: await Menu.find().populate("product"), 
         }
         res.send(products);
     }
