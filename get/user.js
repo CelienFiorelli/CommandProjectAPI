@@ -9,6 +9,11 @@ module.exports = {
         const token = await Token.findOne({ token: req.query.token }).populate('user');
 
         if (!token) return res.send({ status: 403, message: "Token invalid!" })
-        res.send({ user: { firstname: token.user.firstname, lastname: token.user.lastname, email: token.user.email } });
+        res.send({ user: {
+            firstname: token.user.firstname,
+            lastname: token.user.lastname,
+            email: token.user.email,
+            role: token.user.role
+        }});
     }
 }

@@ -16,7 +16,12 @@ module.exports = {
         if (!product) return res.send({ status: 404})
 
         const user = (await Token.findOne({ token: req.query.token }).populate("user")).user;
-        await ShoppingCart.findOneAndUpdate({ user: user, product: product }, {$inc: { quantity: number}}, {upsert: true, new: true})
-        res.send({ status: 200 })
+        const shoppingItem = await ShoppingCart.findOneAndUpdate({ user: user, product: product }, {$inc: { quantity: number}}, {upsert: true, new: true})
+        if (shoppingItem.quantity <= 0) {
+            await ShoppingCart.deleteOne({ _id: shoppingItem._id});
+        }
+        
+        const items = (await ShoppingCart.find({user: user}).populate("product")).map(i => {return {product: i.product, quantity: i.quantity}});
+        res.send({ status: 200, items: items })
     }
 }

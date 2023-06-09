@@ -29,11 +29,11 @@ const getToken = async (user) => {
     }
 } 
 
-const tokenIsValid = async (tested_token) => {
+const tokenIsValid = async (tested_token, role="user") => {
     const token = await Token.findOne({
         token: tested_token
-    })
-    if (token && token.expiration_date > new Date())
+    }).populate("user");
+    if (token && token.user.role == role && token.expiration_date > new Date())
     {
         return true
     }
