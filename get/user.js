@@ -13,7 +13,8 @@ module.exports = {
             firstname: token.user.firstname,
             lastname: token.user.lastname,
             email: token.user.email,
-            role: token.user.role
+            fidelity: token.user.fidelity,
+            role: token.user.role,
         }});
     }
 }

@@ -5,5 +5,6 @@ module.exports = model('User', new Schema({
     password: String,
     firstname: String,
     lastname: String,
+    fidelity: {type: Number, default: 0},
     role: { type: String, required: true, default: "user" }
 }));

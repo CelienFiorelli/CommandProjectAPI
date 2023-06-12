@@ -3,6 +3,7 @@ const ShoppingCart = require("../models/ShoppingCart");
 const { tokenIsValid } = require("../utils/tokenHandler");
 const Order = require("../models/Order");
 const Token = require("../models/Token");
+const User = require("../models/User");
 
 module.exports = {
     endpoint: "/payment",
@@ -22,6 +23,9 @@ module.exports = {
             }
         }
         await ShoppingCart.deleteMany({user: user})
+
+        user.fidelity += Math.round(req.query.amount) * 2;
+        user.save()
         
         res.send({ status: 200 })
     }
