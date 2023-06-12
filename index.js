@@ -27,9 +27,6 @@ app.listen(port, () => {
         useUnifiedTopology: true
     }).then(() => {
             console.log("[+] Database connected");
-            // Burger.deleteMany();
-            // Drink.deleteMany();
-            // Menu.deleteMany();
         })
         .catch((err) => {
             console.error(`Error\n${err}`);

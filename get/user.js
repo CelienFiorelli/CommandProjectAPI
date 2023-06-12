@@ -8,7 +8,7 @@ module.exports = {
         if (!req.query.token) return res.send({ status: 403, message: "Token required!" })
         const token = await Token.findOne({ token: req.query.token }).populate('user');
 
-        if (!token) return res.send({ status: 403, message: "Token invalid!" })
+        if (!token || !token.user) return res.send({ status: 403, message: "Token invalid!" })
         res.send({ user: {
             firstname: token.user.firstname,
             lastname: token.user.lastname,
