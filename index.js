@@ -2,10 +2,6 @@ const { connectString } = require('./config.json');
 const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('fs');
-const path = require('path');
-const Burger = require('./models/Burger');
-const Drink = require('./models/Drink');
-const Menu = require('./models/Menu');
 
 const app = express();
 
