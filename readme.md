@@ -9,7 +9,7 @@ Créer le fichier `config.json` à la racine du projet
 Puis mettre la variable de connection suivante dedans pour utiliser ma base de données
 ```
 {
-    "connectString": "mongodb+srv://fio:kkj40VPeagkJjiCd@cluster0.i2hkxwm.mongodb.net/test?retryWrites=true&w=majority"             
+    "connectString": "mongodb+srv://..."             
 }
 ```
 
